@@ -5,17 +5,23 @@
  */
 package listadeproduto;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Alunos
  */
-public class ListaDeProduto {
+public class ProdutoDAO {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Conexao.getConexao();
+    private Connection conn;
+    
+    public ProdutoDAO(Connection conn) {
+        this.conn = conn;
     }
+    
+    public void insere() {
+        
+    }
+    
     
 }
