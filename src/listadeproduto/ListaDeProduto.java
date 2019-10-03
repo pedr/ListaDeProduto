@@ -15,7 +15,7 @@ public class ListaDeProduto {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Conexao.getConexao();
+        new ProdutoDAO(Conexao.getConexao()).pegaTudo();
     }
     
 }
