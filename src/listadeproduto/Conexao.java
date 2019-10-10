@@ -33,7 +33,7 @@ public class Conexao {
     public static void criarBanco() {
         String sql = "CREATE TABLE IF NOT EXISTS produtos ("
                 + "id int AUTO_INCREMENT, "
-                + "cod varchar(16), "
+                + "cod varchar(128), "
                 + "descricao varchar(256), "
                 + "PRIMARY KEY (id)"
                 + ")";

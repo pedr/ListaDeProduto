@@ -22,15 +22,43 @@ public class ProdutoDAO {
         this.conn = conn;
     }
     
-    public void insere(String cod, String descricao) {
+    public void insere(Produto p) {
         try {
             PreparedStatement pt = this.conn.prepareStatement("INSERT INTO produtos (cod, descricao) VALUES (?,?)");
-            pt.setString(1, cod);
-            pt.setString(2, descricao);
+            pt.setString(1, p.getCod());
+            pt.setString(2, p.getDescricao());
             pt.execute();
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void insere(ArrayList<Produto> produtos) {
+        try {
+            for (Produto p : produtos) {
+                this.insere(p);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    
+    public ArrayList<Produto> findByCod(String str) {
+        try {
+            PreparedStatement pt = this.conn.prepareStatement("SELECT * FROM produtos WHERE cod like ?");
+            pt.setString(1, "%" + str + "%");
+            ResultSet rs = pt.executeQuery();
+            ArrayList<Produto> produtos = new ArrayList<>();
+            while (rs.next()) {
+                Produto produto =  new Produto(rs.getString("cod"), rs.getString("descricao"));
+                produto.setId(rs.getInt("id"));
+                produtos.add(produto);
+            }
+            return produtos;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
     
     public ArrayList<Produto> pegaTudo() {
